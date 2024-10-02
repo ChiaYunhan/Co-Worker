@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Maps Review Scraper</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Scrape Google Map Reviews</h1>
+
+      <!-- Form for scraping the Google Maps reviews -->
+      <form id="scrape-form">
+        <input
+          type="text"
+          id="url"
+          name="url"
+          placeholder="Google Map URL"
+          required
+        />
+        <input type="submit" value="Start Scraping" />
+      </form>
+
+      <!-- Loader div -->
+      <div id="loading" style="display: none">
+        <p>Scraping in progress, please wait...</p>
+        <div class="loader"></div>
+        <!-- Spinner -->
+      </div>
+
+      <!-- Combined form for both Download and Upload, initially hidden -->
+      <form id="download-upload-form" style="display: none">
+        <label for="csv_name">Enter CSV Name (without .csv):</label>
+        <input type="text" id="csv_name" name="csv_name" required />
+        <!-- CSV name is required -->
+
+        <div class="button-group">
+          <!-- Download button -->
+          <button type="button" id="download-csv-btn">Download as CSV</button>
+
+          <!-- Upload to S3 button -->
+          <button type="button" id="upload-s3-btn" onclick="uploadToS3()">
+            Upload to S3
+          </button>
+        </div>
+      </form>
+
+      <!-- Message div for displaying status messages -->
+      <div id="status-message" style="display: none"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>
